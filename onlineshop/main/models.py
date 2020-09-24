@@ -201,6 +201,8 @@ class Order(models.Model):
     last_name = models.CharField(max_length=55, verbose_name='Фамилия')
     phone = models.CharField(max_length=15, verbose_name='Номер телефона',
                              null=True, blank=True)
+    email = models.EmailField(max_length=100, verbose_name='Email', null=True,
+                              blank=True)
     cart = models.ForeignKey(Cart, verbose_name='Корзина',
                              on_delete=models.CASCADE, null=True, blank=True)
     address = models.CharField(max_length=300, verbose_name='Адрес доставки',
