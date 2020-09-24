@@ -23,6 +23,7 @@ class TerraceAdmin(admin.ModelAdmin):
 admin.site.register(Category)
 admin.site.register(Vagonka, VagonkaAdmin)
 admin.site.register(Terrace, TerraceAdmin)
+admin.site.register(Stairs)
 admin.site.register(CartProduct)
 admin.site.register(Cart)
 admin.site.register(Customer)

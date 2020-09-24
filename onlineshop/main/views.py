@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.views.generic import DetailView, View
 from .models import (Vagonka, Terrace, Category, Customer, Cart,
-                     CartProduct)
+                     CartProduct, Stairs)
 from .mixins import CategoryDetailMixin, CartMixin
 from .forms import OrderForm
 from .utils import recalc_cart
@@ -28,6 +28,7 @@ class ProductDetailView(CartMixin, CategoryDetailMixin, DetailView):
     CT_MODEL_MODEL_CLASS = {
         'vagonka': Vagonka,
         'terrace': Terrace,
+        'stairs': Stairs,
     }
 
     def dispatch(self, request, *args, **kwargs):
@@ -163,3 +164,27 @@ class MakeOrderView(CartMixin, View):
                                  'Спасибо за Ваш заказ!')
             return HttpResponseRedirect('/')
         return HttpResponseRedirect('check_out')
+
+
+class About(CartMixin, View):
+
+    def get(self, request, *args, **kwargs):
+        categories = Category.objects.get_categories_for_left_side_bar()
+        context = {
+            'categories': categories,
+            'cart': self.cart
+        }
+
+        return render(request, 'about.html', context)
+
+
+class Contact(CartMixin, View):
+
+    def get(self, request, *args, **kwargs):
+        categories = Category.objects.get_categories_for_left_side_bar()
+        context = {
+            'categories': categories,
+            'cart': self.cart
+        }
+
+        return render(request, 'contact.html', context)

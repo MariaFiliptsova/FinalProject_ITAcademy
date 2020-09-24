@@ -39,7 +39,7 @@ class Category(models.Model):
     slug = models.SlugField(unique=True)
     image = models.ImageField(verbose_name='Изображение', null=True,
                               blank=True)
-    description = models.TextField(max_length=300, verbose_name='Описание',
+    description = models.TextField(max_length=1000, verbose_name='Описание',
                                    null=True, blank=True)
     objects = CategoryManager()
 
@@ -80,7 +80,7 @@ class Vagonka(Product):
                                verbose_name='Страна производства')
 
     def __str__(self):
-        return f'{self.category.name} | {self.title}'
+        return f'{self.title}'
 
     def get_absolute_url(self):
         return get_product_url(self, 'product_detail')
@@ -97,7 +97,22 @@ class Terrace(Product):
                                verbose_name='Страна производства')
 
     def __str__(self):
-        return f'{self.category.name} | {self.title}'
+        return f'{self.title}'
+
+    def get_absolute_url(self):
+        return get_product_url(self, 'product_detail')
+
+
+class Stairs(Product):
+
+    depth = models.CharField(max_length=20, verbose_name='Толщина')
+    width = models.CharField(max_length=20, verbose_name='Общая ширина')
+    length = models.CharField(max_length=20, verbose_name='Длина')
+    country = models.CharField(max_length=20,
+                               verbose_name='Страна производства')
+
+    def __str__(self):
+        return f'{self.title}'
 
     def get_absolute_url(self):
         return get_product_url(self, 'product_detail')

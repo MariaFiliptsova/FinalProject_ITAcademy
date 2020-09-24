@@ -1,13 +1,14 @@
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.detail import View
-from .models import Category, Cart, Customer, Vagonka, Terrace
+from .models import Category, Cart, Customer, Vagonka, Terrace, Stairs
 
 
 class CategoryDetailMixin(SingleObjectMixin):
 
     CATEGORY_SLUG_TO_PRODUCT_MODEL = {
         'vagonka': Vagonka,
-        'terrace': Terrace
+        'terrace': Terrace,
+        'stairs': Stairs,
     }
 
     def get_context_data(self, **kwargs):

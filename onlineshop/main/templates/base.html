@@ -34,13 +34,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">О компании</a>
+            <a class="nav-link" href="{% url 'about' %}">О компании</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Продукция</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Контакты</a>
+            <a class="nav-link" href="{% url 'contact' %}">Контакты</a>
           </li>
            <li class="nav-item">
              <a class="nav-link" href="{% url 'cart' %}">Корзина <span class="badge badge-pill badge-danger">{{ cart.products.count }}</span></a>
@@ -73,7 +70,7 @@
 
       <div class="col-lg-9">
       {% block content %}
-
+        <h1>Пиломатериалы в Минске</h1>
        <div class="container mt-3">
          <p>Мы предлагаем нашим Клиентам  купить пиломатериалы высшего
            качества из следующих пород древесины: лиственницы, хвои, липы,
