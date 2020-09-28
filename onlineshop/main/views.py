@@ -4,11 +4,13 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.views.generic import DetailView, View
+
 from .models import (Vagonka, Terrace, Category, Customer, Cart,
                      CartProduct, Stairs)
 from .mixins import CategoryDetailMixin, CartMixin
 from .forms import OrderForm
 from .utils import recalc_cart
+from django.core.mail import send_mail
 
 
 class BaseView(CartMixin, View):
@@ -144,6 +146,7 @@ class MakeOrderView(CartMixin, View):
     def post(self, request, *args, **kwargs):
         form = OrderForm(request.POST or None)
         customer = Customer.objects.get(user=request.user)
+        sent = False
         if form.is_valid():
             new_order = form.save(commit=False)
             new_order.customer = customer
@@ -161,7 +164,17 @@ class MakeOrderView(CartMixin, View):
             new_order.cart = self.cart
             new_order.save()
             customer.orders.add(new_order)
+            cd = form.cleaned_data
             subject = 'Подтверждение заказа'
+            body = ('Спасибо за Ваш заказ!'
+                    'В скором времени наш менеджер свяжется с Вами.')
+            send_mail(
+                subject,
+                body,
+                'info@lipa.by',
+                [cd['email'], ]
+            )
+            sent = True
             return HttpResponseRedirect('thank_you')
         return HttpResponseRedirect('check_out')
 

@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block title %}
+  <title>{{ category.name }}</title>
+{% endblock title %}
+
 {% block content %}
 <div><img class="img-fluid mt-3 mb-3" src="{{ category.image.url }}"></div>
 <div><h1>{{ category.name }}</h1></div>
@@ -7,67 +11,67 @@
 <div>
   {{ category.description }}
 </div>
-{% if category.slug == 'stairs' %}
-    <table class="table mt-3">
-      <thead>
-        <tr>
-          <th scope="col">Наименование, порода, сорт</th>
-          <th scope="col">Толщина, мм.</th>
-          <th scope="col">Ширина общая, мм.</th>
-          <th scope="col">Длина, м.</th>
-            <th scope="col">Страна произ-ва	</th>
-          <th scope="col">Стоимость за куб.м., бел.руб.</th>
-            <th></th>
-        </tr>
-      </thead>
-      <tbody>
-      {% for product in category_products %}
-        <tr>
-          <th scope="row">{{ product.title }}</th>
-          <td>{{ product.depth }}</td>
-          <td>{{ product.width }}</td>
-            <td>{{ product.length }}</td>
-          <td>{{ product.country }}</td>
-          <td>{{ product.price }}</td>
-          <td><a href="{% url 'add_to_cart' ct_model=product.get_model_name slug=product.slug %}">
-          <button type="button" class="btn btn-outline-success">Добавить в корзину</button>
-          </a>
-          </td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-{% else %}
+    {% if category.slug == 'stairs' %}
       <table class="table mt-3">
-      <thead>
-        <tr>
-          <th scope="col">Наименование, порода, сорт</th>
-          <th scope="col">Толщина, мм.</th>
-          <th scope="col">Ширина общая, мм.</th>
-            <th scope="col">Ширина рабочая, мм.</th>
-          <th scope="col">Длина, м.</th>
-            <th scope="col">Страна произ-ва	</th>
-          <th scope="col">Стоимость за куб.м., бел.руб.</th>
-            <th></th>
-        </tr>
-      </thead>
-      <tbody>
-      {% for product in category_products %}
-        <tr>
-          <th scope="row">{{ product.title }}</th>
-          <td>{{ product.depth }}</td>
-          <td>{{ product.width }}</td>
-          <td>{{ product.working_width }}</td>
-            <td>{{ product.length }}</td>
-          <td>{{ product.country }}</td>
-          <td>{{ product.price }}</td>
-          <td><a href="{% url 'add_to_cart' ct_model=product.get_model_name slug=product.slug %}">
-          <button type="button" class="btn btn-outline-success">Добавить в корзину</button>
-          </a>
-          </td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-{% endif %}
+        {% for product in category_products %}
+            <thead>
+              <tr>
+                <th scope="col">Наименование, порода, сорт</th>
+                <th scope="col">Толщина, мм.</th>
+                <th scope="col">Ширина общая, мм.</th>
+                <th scope="col">Длина, м.</th>
+                  <th scope="col">Страна произ-ва	</th>
+                <th scope="col">Стоимость за куб.м., бел.руб.</th>
+                  <th></th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <th scope="row">{{ product.title }}</th>
+                  <td>{{ product.depth }}</td>
+                  <td>{{ product.width }}</td>
+                    <td>{{ product.length }}</td>
+                  <td>{{ product.country }}</td>
+                  <td>{{ product.price }}</td>
+                  <td><a href="{% url 'add_to_cart' ct_model=product.get_model_name slug=product.slug %}">
+                  <button type="button" class="btn btn-outline-success">Добавить в корзину</button>
+                  </a>
+                  </td>
+                </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+        <table class="table mt-3">
+        <thead>
+          <tr>
+            <th scope="col">Наименование, порода, сорт</th>
+            <th scope="col">Толщина, мм.</th>
+            <th scope="col">Ширина общая, мм.</th>
+              <th scope="col">Ширина рабочая, мм.</th>
+            <th scope="col">Длина, м.</th>
+              <th scope="col">Страна произ-ва	</th>
+            <th scope="col">Стоимость за куб.м., бел.руб.</th>
+              <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for product in category_products %}
+          <tr>
+            <th scope="row">{{ product.title }}</th>
+            <td>{{ product.depth }}</td>
+            <td>{{ product.width }}</td>
+            <td>{{ product.working_width }}</td>
+              <td>{{ product.length }}</td>
+            <td>{{ product.country }}</td>
+            <td>{{ product.price }}</td>
+            <td><a href="{% url 'add_to_cart' ct_model=product.get_model_name slug=product.slug %}">
+            <button type="button" class="btn btn-outline-success">Добавить в корзину</button>
+            </a>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
 {% endblock content %}
