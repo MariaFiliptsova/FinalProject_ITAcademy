@@ -35,6 +35,11 @@ class CategoryManager(models.Manager):
 
 class Category(models.Model):
 
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категория'
+
+
     name = models.CharField(max_length=255, verbose_name='Имя категории')
     slug = models.SlugField(unique=True)
     image = models.ImageField(verbose_name='Изображение', null=True,
@@ -71,6 +76,10 @@ class Product(models.Model):
 
 class Vagonka(Product):
 
+    class Meta:
+        verbose_name = 'Вагонка'
+        verbose_name_plural = 'Вагонка'
+
     depth = models.CharField(max_length=20, verbose_name='Толщина')
     width = models.CharField(max_length=20, verbose_name='Общая ширина')
     working_width = models.CharField(max_length=20,
@@ -87,6 +96,10 @@ class Vagonka(Product):
 
 
 class Terrace(Product):
+
+    class Meta:
+        verbose_name = 'Террасная доска'
+        verbose_name_plural = 'Террасная доска'
 
     depth = models.CharField(max_length=20, verbose_name='Толщина')
     width = models.CharField(max_length=20, verbose_name='Общая ширина')
@@ -105,6 +118,10 @@ class Terrace(Product):
 
 class Stairs(Product):
 
+    class Meta:
+        verbose_name = 'Лестничные элементы'
+        verbose_name_plural = 'Лестничные элементы'
+
     depth = models.CharField(max_length=20, verbose_name='Толщина')
     width = models.CharField(max_length=20, verbose_name='Общая ширина')
     length = models.CharField(max_length=20, verbose_name='Длина')
@@ -119,6 +136,10 @@ class Stairs(Product):
 
 
 class CartProduct(models.Model):
+
+    class Meta:
+        verbose_name = 'Продукт в корзине'
+        verbose_name_plural = 'Продукты в корзине'
 
     user = models.ForeignKey('Customer', verbose_name='Пользователь',
                              on_delete=models.CASCADE)
@@ -142,6 +163,10 @@ class CartProduct(models.Model):
 
 class Cart(models.Model):
 
+    class Meta:
+        verbose_name = 'Корзина'
+        verbose_name_plural = 'Корзина'
+
     owner = models.ForeignKey('Customer', null=True, verbose_name='Покупатель',
                               on_delete=models.CASCADE)
     products = models.ManyToManyField(CartProduct, blank=True,
@@ -159,6 +184,10 @@ class Cart(models.Model):
 
 class Customer(models.Model):
 
+    class Meta:
+        verbose_name = 'Клиент'
+        verbose_name_plural = 'Клиенты'
+
     user = models.ForeignKey(User, verbose_name='Пользователь',
                              on_delete=models.CASCADE)
     phone = models.CharField(max_length=15, verbose_name='Номер телефона',
@@ -173,6 +202,10 @@ class Customer(models.Model):
 
 
 class Order(models.Model):
+
+    class Meta:
+        verbose_name = 'Заказ'
+        verbose_name_plural = 'Заказы'
 
     STATUS_NEW = 'new'
     STATUS_IN_PROGRESS = 'in_progress'
