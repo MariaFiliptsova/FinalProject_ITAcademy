@@ -156,6 +156,25 @@ class DoskaPola(Product):
         return get_product_url(self, 'product_detail')
 
 
+class Brus(Product):
+
+    class Meta:
+        verbose_name = 'Брус'
+        verbose_name_plural = 'Брус'
+
+    depth = models.CharField(max_length=20, verbose_name='Толщина')
+    width = models.CharField(max_length=20, verbose_name='Ширина')
+    length = models.CharField(max_length=20, verbose_name='Длина')
+    country = models.CharField(max_length=20,
+                               verbose_name='Страна производства')
+
+    def __str__(self):
+        return f'{self.title}'
+
+    def get_absolute_url(self):
+        return get_product_url(self, 'product_detail')
+
+
 class CartProduct(models.Model):
 
     class Meta:

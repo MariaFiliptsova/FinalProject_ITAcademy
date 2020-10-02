@@ -12,7 +12,7 @@
   {{ category.description }}
 </div>
     {% if category_products %}
-        {% if category.slug == 'stairs' %}
+        {% if category.slug == 'stairs' or category.slug == 'brus' %}
           <table class="table mt-3">
             {% for product in category_products %}
                 <thead>
