@@ -1,6 +1,8 @@
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.detail import View
-from .models import Category, Cart, Customer, Vagonka, Terrace, Stairs
+from .models import (
+    Category, Cart, Customer, Vagonka, Terrace, Stairs, DoskaPola
+)
 
 
 class CategoryDetailMixin(SingleObjectMixin):
@@ -9,6 +11,7 @@ class CategoryDetailMixin(SingleObjectMixin):
         'vagonka': Vagonka,
         'terrace': Terrace,
         'stairs': Stairs,
+        'doska-pola': DoskaPola,
     }
 
     def get_context_data(self, **kwargs):

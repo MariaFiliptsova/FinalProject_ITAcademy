@@ -135,6 +135,27 @@ class Stairs(Product):
         return get_product_url(self, 'product_detail')
 
 
+class DoskaPola(Product):
+
+    class Meta:
+        verbose_name = 'Доска пола'
+        verbose_name_plural = 'Доска пола'
+
+    depth = models.CharField(max_length=20, verbose_name='Толщина')
+    width = models.CharField(max_length=20, verbose_name='Общая ширина')
+    working_width = models.CharField(max_length=20,
+                                     verbose_name='Рабочая ширина')
+    length = models.CharField(max_length=20, verbose_name='Длина')
+    country = models.CharField(max_length=20,
+                               verbose_name='Страна производства')
+
+    def __str__(self):
+        return f'{self.title}'
+
+    def get_absolute_url(self):
+        return get_product_url(self, 'product_detail')
+
+
 class CartProduct(models.Model):
 
     class Meta:

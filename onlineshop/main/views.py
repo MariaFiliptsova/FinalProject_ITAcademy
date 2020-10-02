@@ -5,8 +5,11 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.views.generic import DetailView, View
 
-from .models import (Vagonka, Terrace, Category, Customer, Cart,
-                     CartProduct, Stairs)
+from .models import (
+    Category,
+    Customer,
+    CartProduct
+)
 from .mixins import CategoryDetailMixin, CartMixin
 from .forms import OrderForm
 from .utils import recalc_cart
